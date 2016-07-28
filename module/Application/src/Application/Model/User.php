@@ -8,12 +8,30 @@
 
 namespace Application\Model;
 
-
+/**
+ * Class User
+ * @package Application\Model
+ */
 class User
 {
+    /**
+     * @var integer
+     */
     private $id;
+
+    /**
+     * @var string
+     */
     private $name;
+
+    /**
+     * @var array
+     */
     private $groups;
+
+    /**
+     * @var array
+     */
     private $posts;
 
     public function __construct()
@@ -54,16 +72,25 @@ class User
         $this->name = $name;
     }
 
+    /**
+     * @param Post $post
+     */
     public function createPost(Post $post)
     {
         $this->posts[] = $post;
     }
 
+    /**
+     * @return array
+     */
     public function getPosts()
     {
         return $this->posts;
     }
 
+    /**
+     * @param array $groupIds
+     */
     public function setGroups(array $groupIds)
     {
         $this->groups = $groupIds;

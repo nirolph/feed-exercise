@@ -11,8 +11,17 @@ namespace Application\Factory;
 
 use Application\Model\User;
 
+/**
+ * User factory
+ * Class BaseUserFactory
+ * @package Application\Factory
+ */
 class BaseUserFactory implements FactoryInterface
 {
+    /**
+     * @param array $data
+     * @return User
+     */
     public function build(array $data)
     {
         $user = new User();

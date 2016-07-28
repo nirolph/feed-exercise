@@ -23,5 +23,9 @@ interface PostRepositoryInterface
      */
     public function getLatestPosts(ID $group, array $conditions = []);
 
+    /**
+     * @param Post $post
+     * @return mixed
+     */
     public function persist(Post $post);
 }

@@ -8,8 +8,15 @@
 
 namespace Application\Factory;
 
-
+/**
+ * Interface FactoryInterface
+ * @package Application\Factory
+ */
 interface FactoryInterface
 {
+    /**
+     * @param array $data
+     * @return mixed
+     */
     public function build(array $data);
 }

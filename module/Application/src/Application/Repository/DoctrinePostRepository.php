@@ -16,17 +16,39 @@ use Doctrine\DBAL\Connection;
 use Zend\Debug\Debug;
 use Application\Model\Post;
 
+/**
+ * Class DoctrinePostRepository
+ * @package Application\Repository
+ */
 class DoctrinePostRepository implements PostRepositoryInterface
 {
+    /**
+     * @var Connection
+     */
     private $connection;
+
+    /**
+     * @var FactoryInterface
+     */
     private $postFactory;
 
+    /**
+     * DoctrinePostRepository constructor.
+     * @param FactoryInterface $postFactory
+     * @param Connection $connection
+     */
     public function __construct(FactoryInterface $postFactory, Connection $connection)
     {
         $this->postFactory = $postFactory;
         $this->connection = $connection;
     }
 
+    /**
+     * @param ID $groupId
+     * @param array $conditions
+     * @return array
+     * @throws Exception
+     */
     public function getLatestPosts(ID $groupId, array $conditions = [])
     {
         $results = $this->buildQuery()->select('*')
@@ -50,6 +72,9 @@ class DoctrinePostRepository implements PostRepositoryInterface
         return $posts;
     }
 
+    /**
+     * @param Post $post
+     */
     public function persist(Post $post)
     {
         $this->buildQuery()->insert('post')
@@ -64,6 +89,9 @@ class DoctrinePostRepository implements PostRepositoryInterface
             ->execute();
     }
 
+    /**
+     * @return \Doctrine\DBAL\Query\QueryBuilder
+     */
     private function buildQuery()
     {
         return $this->connection->createQueryBuilder();

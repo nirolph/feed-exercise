@@ -14,24 +14,50 @@ use Application\Model\Post;
 use Application\Model\ID;
 use Application\Repository\PostRepositoryInterface;
 
+/**
+ * Class PostService
+ * @package Application\Service
+ */
 class PostService implements ServiceInterface
 {
+    /**
+     * @var array
+     */
     private $errors;
+
+    /**
+     * @var PostDTO
+     */
     private $postDTO;
+
+    /**
+     * @var PostRepositoryInterface
+     */
     private $postRepository;
 
+    /**
+     * PostService constructor.
+     * @param PostRepositoryInterface $postRepository
+     */
     public function __construct(PostRepositoryInterface $postRepository)
     {
         $this->postRepository = $postRepository;
         $this->errors = [];
     }
 
+    /**
+     * @param PostDTO $post
+     * @return $this
+     */
     public function setup(PostDTO $post)
     {
         $this->postDTO = $post;
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function run()
     {
         try {
@@ -47,11 +73,17 @@ class PostService implements ServiceInterface
         }
     }
 
+    /**
+     * @return bool
+     */
     public function hasErrors()
     {
         return !empty($this->errors);
     }
 
+    /**
+     * @return array
+     */
     public function getErrors()
     {
         return $this->errors;

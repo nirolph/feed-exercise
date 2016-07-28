@@ -8,8 +8,14 @@
 
 namespace Application\Service;
 
-
+/**
+ * Interface ServiceInterface
+ * @package Application\Service
+ */
 interface ServiceInterface
 {
+    /**
+     * @return mixed
+     */
     public function run();
 }

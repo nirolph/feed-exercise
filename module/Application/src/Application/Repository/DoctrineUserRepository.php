@@ -13,12 +13,33 @@ use Application\Model\ID;
 use Application\Model\User;
 use Doctrine\DBAL\Connection;
 
+/**
+ * Class DoctrineUserRepository
+ * @package Application\Repository
+ */
 class DoctrineUserRepository implements UserRepositoryInterface
 {
+    /**
+     * @var PostRepositoryInterface
+     */
     private $postRepository;
+
+    /**
+     * @var Connection
+     */
     private $connection;
+
+    /**
+     * @var FactoryInterface
+     */
     private $userFactory;
 
+    /**
+     * DoctrineUserRepository constructor.
+     * @param FactoryInterface $userFactory
+     * @param Connection $connection
+     * @param PostRepositoryInterface $postRepository
+     */
     public function __construct(FactoryInterface $userFactory ,Connection $connection, PostRepositoryInterface $postRepository)
     {
         $this->postRepository = $postRepository;
@@ -26,6 +47,9 @@ class DoctrineUserRepository implements UserRepositoryInterface
         $this->userFactory = $userFactory;
     }
 
+    /**
+     * @param User $user
+     */
     public function persist(User $user)
     {
         foreach ($user->getPosts() as $post) {
@@ -33,6 +57,11 @@ class DoctrineUserRepository implements UserRepositoryInterface
         }
     }
 
+    /**
+     * @param ID $id
+     * @return mixed
+     * @throws Exception
+     */
     public function getUserWithId(ID $id)
     {
         $userData = $this->buildQuery()->select('*')
@@ -49,6 +78,9 @@ class DoctrineUserRepository implements UserRepositoryInterface
         return $this->userFactory->build($userData);
     }
 
+    /**
+     * @return \Doctrine\DBAL\Query\QueryBuilder
+     */
     private function buildQuery()
     {
         return $this->connection->createQueryBuilder();

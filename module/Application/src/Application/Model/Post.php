@@ -8,12 +8,30 @@
 
 namespace Application\Model;
 
-
+/**
+ * Class Post
+ * @package Application\Model
+ */
 class Post
 {
+    /**
+     * @var integer
+     */
     private $id;
+
+    /**
+     * @var \DateTime
+     */
     private $postDate;
+
+    /**
+     * @var string
+     */
     private $content;
+
+    /**
+     * @var integer
+     */
     private $userId;
 
     /**

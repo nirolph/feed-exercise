@@ -12,8 +12,18 @@ namespace Application\Factory;
 use Application\Model\Post;
 use Zend\Debug\Debug;
 
+/**
+ * Post factory
+ * Class BasePostFactory
+ * @package Application\Factory
+ */
 class BasePostFactory implements FactoryInterface
 {
+    /**
+     * Build a Post entity with the provided data
+     * @param array $data
+     * @return Post
+     */
     public function build(array $data)
     {
         $post = new Post();
